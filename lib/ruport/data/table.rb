@@ -466,9 +466,9 @@ module Ruport::Data
       end 
 
       if block_given?
-        each { |r| r[name] = yield(r) || options[:default] }
+        each { |r| r[name] = yield(r) || options[:default].dup rescue options[:default] }
       else
-        each { |r| r[name] = options[:default] }
+        each { |r| r[name] = options[:default].dup rescue options[:default] }
       end; self
     end     
     

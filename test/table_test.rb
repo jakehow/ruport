@@ -487,6 +487,10 @@ class TestTableColumnOperations < Test::Unit::TestCase
      a.add_column("c")
      assert_equal Table(%w[a b c], :data => [[1,2,nil],[3,4,nil],[5,6,nil]]), a
 
+     a = Table(%w[a b], :data => [[1,2],[3,4]])
+     a.add_column("c",:default => "x")
+     assert !a.column("c")[0].equal?(a.column("c")[1]), 'same string object inserted in every row'
+      
      a = Table(%w[a b], :data => [[1,2],[3,4],[5,6]])
      a.add_column("c",:default => "x")
      assert_equal Table(%w[a b c], :data => [[1,2,'x'],[3,4,'x'],[5,6,'x']]), a    
